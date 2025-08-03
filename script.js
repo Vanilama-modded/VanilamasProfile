@@ -3,7 +3,7 @@ class LinkTree {
     constructor() {
         this.links = {
             website: 'https://minecraft-tools-wiki.super.site/',
-            newsletter: 'https://newsletter.yourname.com',
+            newsletter: 'https://modrinth.com/user/Vanilama-modded',
             youtube: 'https://youtube.com/@yourchannel',
             shop: 'https://yourstore.etsy.com',
             discord: 'https://discord.gg/yourserver',
