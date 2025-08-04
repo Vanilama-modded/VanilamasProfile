@@ -4,11 +4,11 @@ class LinkTree {
         this.links = {
             website: 'https://minecraft-tools-wiki.super.site/',
             modrinth: 'https://modrinth.com/user/Vanilama-modded',
-            curseforge: 'https://youtube.com/@yourchannel',
-            shop: 'https://yourstore.etsy.com',
-            discord: 'https://discord.gg/yourserver',
-            github: 'https://github.com/yourusername',
-            coffee: 'https://buymeacoffee.com/yourname'
+            curseforge: 'https://www.curseforge.com/members/vanilama/projects',
+            shop: 'https://linktr.ee/vanilama',
+            discord: 'https://linktr.ee/vanilama',
+            github: 'https://linktr.ee/vanilama',
+            coffee: 'https://linktr.ee/vanilama'
         };
         
         this.init();
