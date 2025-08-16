@@ -5,7 +5,7 @@ class LinkTree {
             website: 'https://minecraft-tools-wiki.super.site/',
             modrinth: 'https://modrinth.com/user/Vanilama-modded',
             curseforge: 'https://www.curseforge.com/members/vanilama/projects',
-            createschems: 'https://drive.google.com/drive/folders/1kFXmDO-9BgqoX3V8AoRrkAv3jeGRhDta?usp=sharing',
+            mcfiles: 'https://drive.google.com/drive/folders/1vBRGisZKlpO1clAqOW7-MXbw01vDIXXN?usp=sharing',
             discord: 'https://linktr.ee/vanilama',
             github: 'https://linktr.ee/vanilama',
             coffee: 'https://linktr.ee/vanilama'
