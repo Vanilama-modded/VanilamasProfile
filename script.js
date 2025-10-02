@@ -2,13 +2,13 @@
 class LinkTree {
     constructor() {
         this.links = {
-            website: 'https://minecraft-tools-wiki.super.site/',
+            website: 'https://vanilama-modded.github.io/Minecraft-Tools-Wiki/',
             modrinth: 'https://modrinth.com/user/Vanilama-modded',
             curseforge: 'https://www.curseforge.com/members/vanilama/projects',
             mcfiles: 'https://drive.google.com/drive/folders/1vBRGisZKlpO1clAqOW7-MXbw01vDIXXN?usp=sharing',
-            discord: 'https://linktr.ee/vanilama',
+            oldwebsite: 'https://minecraft-tools-wiki.super.site/',
             github: 'https://linktr.ee/vanilama',
-            coffee: 'https://linktr.ee/vanilama'
+            coffe: 'https://linktr.ee/vanilama'
         };
         
         this.init();
