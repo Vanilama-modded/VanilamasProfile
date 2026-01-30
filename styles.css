@@ -11,7 +11,7 @@
     --shadow-color: rgba(0, 0, 0, 0.25);
     --gradient-1: linear-gradient(135deg, #7576b3 0%, #764ba2 100%);
     --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-3: linear-gradient(135deg, #7576b3 0%, #00f2fe 100%);
 }
 
 * {
