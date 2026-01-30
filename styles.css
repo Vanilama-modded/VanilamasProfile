@@ -21,11 +21,7 @@
 }
 
 body {
-    .share-tech-regular {
-  font-family: "Share Tech", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--background-color);
     background-image: 
         radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
