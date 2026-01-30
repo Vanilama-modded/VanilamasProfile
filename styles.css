@@ -1,6 +1,6 @@
 :root {
     --primary-color: #7576b3;
-    --secondary-color: #7576b3;
+    --secondary-color: #990000;
     --accent-color: #06b6d4;
     --background-color: #0f172a;
     --surface-color: rgba(30, 41, 59, 0.5);
@@ -9,7 +9,7 @@
     --text-muted: #64748b;
     --border-color: rgba(148, 163, 184, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.25);
-    --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-1: linear-gradient(135deg, #7576b3 0%, #764ba2 100%);
     --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
