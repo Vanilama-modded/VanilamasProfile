@@ -194,8 +194,7 @@ style.textContent = `
     
     .link-card:focus,
     .social-link:focus {
-        outline: 2px solid var(--primary-color);
-        outline-offset: 2px;
+        outline: none;
     }
     
     .visible {
