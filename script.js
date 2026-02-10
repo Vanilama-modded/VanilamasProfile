@@ -252,6 +252,72 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Make it globally accessible for debugging
     window.linkTree = linkTree;
+    // Try to load an optional `background.png` at project root. If present,
+    // apply a blurred background and compute adaptive accent colors.
+    (function loadAndApplyBackground(){
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.src = '/background.png';
+
+        img.onload = () => {
+            try{
+                const col = getAverageColor(img);
+                const hsl = rgbToHsl(col.r, col.g, col.b);
+
+                // derive two pleasant HSL-based accents from the image hue
+                const primary = `hsl(${Math.round(hsl.h)}, 64%, ${Math.min(64, Math.max(36, Math.round(hsl.l*100 + 8))) }%)`;
+                const accent = `hsl(${Math.round((hsl.h + 28) % 360)}, 62%, ${Math.min(58, Math.max(34, Math.round(hsl.l*100 + 2))) }%)`;
+
+                document.documentElement.style.setProperty('--primary-color', primary);
+                document.documentElement.style.setProperty('--accent-color', accent);
+                document.documentElement.style.setProperty('--bg-image', `url('/background.png')`);
+                document.body.classList.add('has-bg');
+            }catch(e){
+                // silently fall back to default CSS colors
+                console.warn('Background loaded but color extraction failed', e);
+            }
+        };
+
+        img.onerror = () => {
+            // If the image doesn't exist or can't be loaded, leave defaults.
+        };
+
+        // compute average color of an image by downscaling to a tiny canvas
+        function getAverageColor(image){
+            const w = 32, h = 32;
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(image, 0, 0, w, h);
+            const data = ctx.getImageData(0,0,w,h).data;
+            let r=0,g=0,b=0,count=0;
+            for(let i=0;i<data.length;i+=4){
+                const alpha = data[i+3]/255;
+                if(alpha < 0.2) continue;
+                r += data[i]*alpha; g += data[i+1]*alpha; b += data[i+2]*alpha; count += alpha;
+            }
+            if(count === 0) return {r:34,g:40,b:60};
+            return {r:Math.round(r/count), g:Math.round(g/count), b:Math.round(b/count)};
+        }
+
+        // convert rgb (0-255) to hsl with h in degrees, s & l in 0-1
+        function rgbToHsl(r,g,b){
+            r/=255; g/=255; b/=255;
+            const max = Math.max(r,g,b), min = Math.min(r,g,b);
+            let h=0, s=0, l=(max+min)/2;
+            if(max !== min){
+                const d = max-min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch(max){
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            return {h: h*360, s: s, l: l};
+        }
+    })();
     
     // Performance monitoring
     if ('performance' in window) {
@@ -265,49 +331,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.style.scrollBehavior = 'smooth';
 });
 
-// Add dark/light mode toggle functionality (bonus feature)
-function addDarkModeToggle() {
-    const toggle = document.createElement('button');
-    toggle.innerHTML = '<i class="fas fa-moon"></i>';
-    toggle.className = 'theme-toggle';
-    toggle.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--surface-color);
-        border: 1px solid var(--border-color);
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-primary);
-    `;
-    
-    toggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-mode');
-        const isLight = document.body.classList.contains('light-mode');
-        toggle.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-    
-    document.body.appendChild(toggle);
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        toggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-}
 
-// Add the theme toggle
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(addDarkModeToggle, 1000);
-});
