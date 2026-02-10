@@ -1,0 +1,24 @@
+{
+  "name": "vanilamasprofile",
+  "version": "1.0.0",
+  "description": "The repo for my linktree like profile page",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vanilama-modded/VanilamasProfile.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Vanilama-modded/VanilamasProfile/issues"
+  },
+  "homepage": "https://github.com/Vanilama-modded/VanilamasProfile#readme",
+  "dependencies": {
+    "puppeteer": "^24.37.2"
+  }
+}

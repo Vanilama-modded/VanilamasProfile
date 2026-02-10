@@ -72,12 +72,8 @@ body{
 
 @media (max-width:480px){.social-links{gap:.6rem}.social-link{width:38px;height:38px}.link-card{flex-direction:column;text-align:center;gap:.6rem}}
 
-/* subtle loading */
 .loading{opacity:0;transform:translateY(10px);animation:fadeIn .45s ease-out forwards}
 
-/* Background image layer (optional). If `--bg-image` is set and `body.has-bg` is
-   present the image will be shown blurred behind the UI. Otherwise the
-   default solid background is used. */
 body::before{
     content:'';
     position:fixed;
@@ -93,7 +89,6 @@ body::before{
     pointer-events:none;
 }
 
-/* subtle overlay between content and background */
 body::after{
     content:'';
     position:fixed;
@@ -107,7 +102,6 @@ body::after{
 body.has-bg::before{opacity:1}
 body.has-bg::after{background:linear-gradient(180deg, rgba(7,16,35,0.12) 0%, rgba(7,16,35,0.6) 100%)}
 
-/* allow accent variables to adapt if set from JS */
 :root{
     --bg-image: none;
 }

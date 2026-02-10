@@ -1,4 +1,3 @@
-// LinkTree Interactive Features
 class LinkTree {
     constructor() {
         this.links = {
@@ -8,7 +7,7 @@ class LinkTree {
             mcfiles: 'https://drive.google.com/drive/folders/1vBRGisZKlpO1clAqOW7-MXbw01vDIXXN?usp=sharing',
             oldwebsite: 'https://minecraft-tools-wiki.super.site/',
             github: 'https://linktr.ee/vanilama',
-            coffe: 'https://linktr.ee/vanilama'
+            coffee: 'https://linktr.ee/vanilama'
         };
         
         this.init();
@@ -21,22 +20,18 @@ class LinkTree {
     }
 
     setupEventListeners() {
-        // Link card click handlers
         document.querySelectorAll('.link-card').forEach(card => {
-            // Add hover sound effect (optional)
             card.addEventListener('mouseenter', () => {
                 this.playHoverEffect();
             });
         });
 
-        // Social link handlers
         document.querySelectorAll('.social-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 this.handleSocialClick(link);
             });
         });
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Tab') {
                 this.handleTabNavigation(e);
@@ -45,7 +40,6 @@ class LinkTree {
     }
 
     handleSocialClick(link) {
-        // Add ripple effect
         this.createRippleEffect(link);
     }
 
@@ -80,28 +74,21 @@ class LinkTree {
     }
 
     playHoverEffect() {
-        // Optional: Add subtle audio feedback
-        // const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
-        // audio.volume = 0.1;
-        // audio.play().catch(() => {});
     }
 
     animateOnLoad() {
-        // Stagger animation for link cards
         const cards = document.querySelectorAll('.link-card');
         cards.forEach((card, index) => {
             card.style.animationDelay = `${index * 0.1}s`;
             card.classList.add('loading');
         });
 
-        // Animate profile section
         const profileSection = document.querySelector('.profile-section');
         profileSection.style.animationDelay = '0.2s';
         profileSection.classList.add('loading');
     }
 
     setupIntersectionObserver() {
-        // Add scroll-based animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -123,13 +110,11 @@ class LinkTree {
         const currentIndex = Array.from(focusableElements).indexOf(document.activeElement);
         
         if (e.shiftKey) {
-            // Shift+Tab (backward)
             if (currentIndex > 0) {
                 e.preventDefault();
                 focusableElements[currentIndex - 1].focus();
             }
         } else {
-            // Tab (forward)
             if (currentIndex < focusableElements.length - 1) {
                 e.preventDefault();
                 focusableElements[currentIndex + 1].focus();
@@ -137,14 +122,12 @@ class LinkTree {
         }
     }
 
-    // Utility method to update profile info dynamically
     updateProfileInfo(name, bio, avatar) {
         if (name) document.querySelector('.profile-name').textContent = name;
         if (bio) document.querySelector('.profile-bio').textContent = bio;
         if (avatar) document.querySelector('.avatar').src = avatar;
     }
 
-    // Method to add new links dynamically
     addLink(type, title, description, icon, url) {
         this.links[type] = url;
         
@@ -169,12 +152,10 @@ class LinkTree {
         
         linksSection.appendChild(newCard);
         
-        // Add hover sound effect
         newCard.addEventListener('mouseenter', () => {
             this.playHoverEffect();
         });
         
-        // Animate new card
         setTimeout(() => {
             newCard.style.animationDelay = '0s';
             newCard.classList.add('loading');
@@ -182,7 +163,6 @@ class LinkTree {
     }
 }
 
-// CSS for ripple animation
 const style = document.createElement('style');
 style.textContent = `
     @keyframes ripple {
@@ -204,25 +184,20 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize the LinkTree when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const linkTree = new LinkTree();
     
-    // Make it globally accessible for debugging
     window.linkTree = linkTree;
-    // Try to load an optional `background.png` at project root. If present,
-    // apply a blurred background and compute adaptive accent colors.
     (function loadAndApplyBackground(){
         const img = new Image();
         img.crossOrigin = 'Anonymous';
-        img.src = '/background.png';
+        img.src = 'background.png';
 
         img.onload = () => {
             try{
                 const col = getAverageColor(img);
                 const hsl = rgbToHsl(col.r, col.g, col.b);
 
-                // derive two pleasant HSL-based accents from the image hue
                 const primary = `hsl(${Math.round(hsl.h)}, 64%, ${Math.min(64, Math.max(36, Math.round(hsl.l*100 + 8))) }%)`;
                 const accent = `hsl(${Math.round((hsl.h + 28) % 360)}, 62%, ${Math.min(58, Math.max(34, Math.round(hsl.l*100 + 2))) }%)`;
 
@@ -231,16 +206,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.style.setProperty('--bg-image', `url('/background.png')`);
                 document.body.classList.add('has-bg');
             }catch(e){
-                // silently fall back to default CSS colors
-                console.warn('Background loaded but color extraction failed', e);
             }
         };
 
         img.onerror = () => {
-            // If the image doesn't exist or can't be loaded, leave defaults.
         };
 
-        // compute average color of an image by downscaling to a tiny canvas
         function getAverageColor(image){
             const w = 32, h = 32;
             const canvas = document.createElement('canvas');
@@ -258,7 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return {r:Math.round(r/count), g:Math.round(g/count), b:Math.round(b/count)};
         }
 
-        // convert rgb (0-255) to hsl with h in degrees, s & l in 0-1
         function rgbToHsl(r,g,b){
             r/=255; g/=255; b/=255;
             const max = Math.max(r,g,b), min = Math.min(r,g,b);
@@ -277,7 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })();
     
-    // Performance monitoring
     if ('performance' in window) {
         window.addEventListener('load', () => {
             const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
@@ -285,8 +254,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Add smooth scrolling for better UX
     document.documentElement.style.scrollBehavior = 'smooth';
 });
-
-
