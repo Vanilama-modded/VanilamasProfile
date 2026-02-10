@@ -23,10 +23,6 @@ class LinkTree {
     setupEventListeners() {
         // Link card click handlers
         document.querySelectorAll('.link-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                this.handleLinkClick(e.currentTarget);
-            });
-
             // Add hover sound effect (optional)
             card.addEventListener('mouseenter', () => {
                 this.playHoverEffect();
@@ -36,7 +32,6 @@ class LinkTree {
         // Social link handlers
         document.querySelectorAll('.social-link').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
                 this.handleSocialClick(link);
             });
         });
@@ -49,48 +44,9 @@ class LinkTree {
         });
     }
 
-    handleLinkClick(card) {
-        const linkType = card.dataset.link;
-        const url = this.links[linkType];
-        
-        if (url) {
-            // Add click animation
-            card.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                card.style.transform = '';
-                this.openLink(url);
-            }, 150);
-        }
-    }
-
     handleSocialClick(link) {
         // Add ripple effect
         this.createRippleEffect(link);
-        
-        // Simulate social link opening
-        setTimeout(() => {
-            const platform = link.querySelector('i').classList[1].split('-')[1];
-            const urls = {
-                youtube: 'https://www.youtube.com/@Vanilama-modded',
-                discord: 'https://discord.gg/wz3ZvfA7kQ',
-                github: 'https://github.com/Vanilama-modded'
-            };
-            
-            if (urls[platform]) {
-                this.openLink(urls[platform]);
-            }
-        }, 300);
-    }
-
-    openLink(url) {
-        // Create a temporary anchor to handle the link
-        const anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.target = '_blank';
-        anchor.rel = 'noopener noreferrer';
-        document.body.appendChild(anchor);
-        anchor.click();
-        document.body.removeChild(anchor);
     }
 
     createRippleEffect(element) {
@@ -193,9 +149,12 @@ class LinkTree {
         this.links[type] = url;
         
         const linksSection = document.querySelector('.links-section');
-        const newCard = document.createElement('div');
+        const newCard = document.createElement('a');
         newCard.className = 'link-card';
         newCard.dataset.link = type;
+        newCard.href = url;
+        newCard.target = '_blank';
+        newCard.rel = 'noopener noreferrer';
         
         newCard.innerHTML = `
             <div class="link-icon">
@@ -210,9 +169,9 @@ class LinkTree {
         
         linksSection.appendChild(newCard);
         
-        // Add event listener to new card
-        newCard.addEventListener('click', () => {
-            this.handleLinkClick(newCard);
+        // Add hover sound effect
+        newCard.addEventListener('mouseenter', () => {
+            this.playHoverEffect();
         });
         
         // Animate new card
