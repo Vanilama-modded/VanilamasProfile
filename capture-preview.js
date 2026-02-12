@@ -15,6 +15,12 @@ const { pathToFileURL } = require('url');
   const filePath = path.join(__dirname, 'index.html');
   await page.goto(pathToFileURL(filePath).href, { waitUntil: 'networkidle0' });
 
+  try {
+    await page.waitForSelector('body.has-bg', { timeout: 5000 });
+  } catch (e) {
+    console.log('Timeout waiting for background to load');
+  }
+
   await page.screenshot({ path: 'preview.png' });
 
   await browser.close();
