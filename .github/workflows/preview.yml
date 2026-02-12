@@ -34,4 +34,5 @@ jobs:
           git config --global user.email 'action@github.com'
           git add preview.png
           git commit -m "Update preview image [skip ci]" || echo "No changes to commit"
+          git pull --rebase origin main
           git push
