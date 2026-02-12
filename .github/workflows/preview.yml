@@ -21,7 +21,9 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
-        run: npm install puppeteer
+        run: |
+          npm ci
+          npx puppeteer browsers install chrome
 
       - name: Generate Preview Image
         run: node capture-preview.js

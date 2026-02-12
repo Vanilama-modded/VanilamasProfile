@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 document.documentElement.style.setProperty('--primary-color', primary);
                 document.documentElement.style.setProperty('--accent-color', accent);
-                document.documentElement.style.setProperty('--bg-image', `url('/background.png')`);
+                document.documentElement.style.setProperty('--bg-image', `url('background.png')`);
                 document.body.classList.add('has-bg');
             }catch(e){
             }
