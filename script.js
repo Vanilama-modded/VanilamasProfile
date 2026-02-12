@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     (function loadAndApplyBackground(){
         const img = new Image();
         img.crossOrigin = 'Anonymous';
-        img.src = 'background.png';
+        img.src = 'background.webp';
 
         img.onload = () => {
             try{
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 document.documentElement.style.setProperty('--primary-color', primary);
                 document.documentElement.style.setProperty('--accent-color', accent);
-                document.documentElement.style.setProperty('--bg-image', `url('background.png')`);
+                document.documentElement.style.setProperty('--bg-image', `url('background.webp')`);
                 document.body.classList.add('has-bg');
             }catch(e){
             }
