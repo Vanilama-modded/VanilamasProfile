@@ -15,19 +15,16 @@ const { pathToFileURL } = require('url');
   const filePath = path.join(__dirname, 'index.html');
   const backgroundPath = path.join(__dirname, 'background.webp');
   
-  // Convert background image to base64
   const backgroundBuffer = fs.readFileSync(backgroundPath);
   const backgroundBase64 = backgroundBuffer.toString('base64');
   const backgroundDataUrl = `data:image/webp;base64,${backgroundBase64}`;
 
   await page.goto(pathToFileURL(filePath).href, { waitUntil: 'networkidle0' });
 
-  // Inject background style directly
   await page.evaluate((bgUrl) => {
     document.documentElement.style.setProperty('--bg-image', `url('${bgUrl}')`);
     document.body.classList.add('has-bg');
     
-    // Force styles for immediate rendering
     const style = document.createElement('style');
     style.textContent = `
       body::before {
@@ -38,7 +35,6 @@ const { pathToFileURL } = require('url');
     document.head.appendChild(style);
   }, backgroundDataUrl);
 
-  // Short wait to ensure rendering
   await new Promise(r => setTimeout(r, 1000));
 
   await page.screenshot({ path: 'preview.png' });
