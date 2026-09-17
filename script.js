@@ -6,7 +6,7 @@ class LinkTree {
             curseforge: 'https://www.curseforge.com/members/vanilama/projects',
             mcfiles: 'https://drive.google.com/drive/folders/1vBRGisZKlpO1clAqOW7-MXbw01vDIXXN?usp=sharing',
             oldwebsite: 'https://minecraft-tools-wiki.super.site/',
-            github: 'https://linktr.ee/vanilama',
+            anilist: 'https://anilist.co/user/7491371',
             coffee: 'https://linktr.ee/vanilama'
         };
         
